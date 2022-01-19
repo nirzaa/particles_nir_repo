@@ -73,7 +73,7 @@ class Bin_energy_data(Dataset):
         if min_shower_num > 0:
             del_list = []
             for key in self.energies:
-                if len(self.energies[key]) < min_shower_num or len(self.energies[key]) >= max_shower_num:
+                if False:
                     del_list.append(key)
             for d in del_list:
                 del self.energies[d]
@@ -109,8 +109,12 @@ class Bin_energy_data(Dataset):
 
         bin_num = num_classes
         final_list = [0] * bin_num  # The 20 here is the bin number - it may be changed of course.
-        en_list.sort()
-        final_list[:len(en_list)] = en_list
+        en_list = np.array(en_list.sort().values)[::-1]
+
+        if len(en_list) >= num_classes:
+            final_list[:num_classes] = en_list[:num_classes]
+        elif len(en_list) < num_classes:
+            final_list[:len(en_list)] = en_list
         final_list = torch.Tensor(final_list)  # Wrap it in a tensor - important for training and testing.
         #########################################
 

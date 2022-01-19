@@ -4,7 +4,7 @@
 
     "arch": {
         "type": "general_model",
-        "args": {"model_type": "ResNet10", "num_classes": 20}
+        "args": {"model_type": "ResNet10", "num_classes": 3}
     },
     "data_loader": {
         "type": "data_loader",
@@ -43,7 +43,7 @@
         "verbosity": 2,
         
         "monitor": "min val_loss",
-        "early_stop": 3,
+        "early_stop": 30,
 
         "tensorboard": true
     }

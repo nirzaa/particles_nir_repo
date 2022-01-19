@@ -376,3 +376,10 @@ This project is licensed under the MIT License. See  LICENSE for more details
 
 ## Acknowledgements
 This project is inspired by the project [Tensorflow-Project-Template](https://github.com/MrGemy95/Tensorflow-Project-Template) by [Mahmoud Gemy](https://github.com/MrGemy95)
+
+## training:
+`python D:\\local_github\\particles_nir_repo\\train.py --config D:\\local_github\\particles_nir_repo\\config.json`
+
+## validating:
+`python D:\\local_github\\particles_nir_repo\\test.py --resume D:\\local_github\\particles_nir_repo\\saved\\models\\Cont\\model_best.pth --c D:\\local_github\\particles_nir_repo\\saved\\models\\Cont\\config.json`
+
