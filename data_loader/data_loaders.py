@@ -68,6 +68,8 @@ class Bin_energy_data(Dataset):
         self.file = file
 
         # Eliminate multiple numbers of some kind
+        min_shower_num = 0
+        max_shower_num = 20
         if min_shower_num > 0:
             del_list = []
             for key in self.energies:
@@ -107,13 +109,8 @@ class Bin_energy_data(Dataset):
 
         bin_num = num_classes
         final_list = [0] * bin_num  # The 20 here is the bin number - it may be changed of course.
-        bin_list = np.linspace(0, x_lim, bin_num)  # Generate the bin limits
-        binplace = np.digitize(en_list, bin_list)  # Divide the list into bins
-        bin_partition = Counter(binplace)  # Count the number of showers for each bin.
-        for k in bin_partition.keys():
-            final_list[int(k) - 1] = bin_partition[k]
-        n = sum(final_list)
-        # final_list = [f / n for f in final_list]    # Bin Normalization by sum
+        en_list.sort()
+        final_list[:len(en_list)] = en_list
         final_list = torch.Tensor(final_list)  # Wrap it in a tensor - important for training and testing.
         #########################################
 
