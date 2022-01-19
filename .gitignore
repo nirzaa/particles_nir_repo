@@ -1,8 +1,9 @@
+# Byte-compiled / optimized / DLL files
 
-saved/models/my_model/0101_120523/config.json
-saved/models/my_model/0101_120523/checkpoint-epoch1.pth
-saved/models/my_model/0101_120442/config.json
-saved/models/my_model/0101_120313/config.json
-saved/models/my_model/0101_120228/config.json
-saved/models/my_model/0101_120149/config.json
-saved/models/my_model/0101_114851/config.json
+__pycache__/
+
+# Distribution / packaging
+
+log/
+models/
+data/
