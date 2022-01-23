@@ -108,14 +108,19 @@ class Bin_energy_data(Dataset):
         x_lim = 13
 
         bin_num = num_classes
-        final_list = [0] * bin_num  # The 20 here is the bin number - it may be changed of course.
+        # final_list = [0] * bin_num  # The 20 here is the bin number - it may be changed of course.
         en_list = np.array(en_list.sort().values)[::-1]
 
-        if len(en_list) >= num_classes:
-            final_list[:num_classes] = en_list[:num_classes]
-        elif len(en_list) < num_classes:
-            final_list[:len(en_list)] = en_list
-        final_list = torch.Tensor(final_list)  # Wrap it in a tensor - important for training and testing.
+        # if len(en_list) >= num_classes:
+        #     final_list[:num_classes] = en_list[:num_classes]
+        # elif len(en_list) < num_classes:
+        #     final_list[:len(en_list)] = en_list
+        # final_list = torch.Tensor(final_list)  # Wrap it in a tensor - important for training and testing.
+        
+        
+        # final_list = torch.unsqueeze(torch.Tensor([len(en_list)]), dim=0)
+        final_list = torch.Tensor([len(en_list)])
+
         #########################################
 
         return d_tens, final_list, num_showers, idx
