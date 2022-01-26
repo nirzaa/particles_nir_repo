@@ -130,7 +130,8 @@ class ResNet(nn.Module):
         The number 2048 will change based on the data and processes happening.
         To address that debug the code in the forward function, find the size of x before this layer and then update.
         """
-        self.fc_1 = nn.Linear(2048, num_classes)  # original: 512 * block.expansion
+        # self.fc_1 = nn.Linear(2048, num_classes)  # original: 512 * block.expansion
+        self.fc_1 = nn.Linear(1024, num_classes)  # original: 512 * block.expansion
         #########################
 
         for m in self.modules():

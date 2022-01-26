@@ -64,7 +64,7 @@ class Bin_energy_data(Dataset):
         del_list = []
         for cntr1, (key1, value1) in enumerate(self.en_dep.items()):
             for cntr2, (key2, value2) in enumerate(value1.items()):
-                if key2[1] < 4 or key2[1] > 6 or key2[2] > 10:
+                if key2[2] < 4 or key2[2] > 6 or key2[0] > 10: # 0: z, 1: x, 2: y
                     pass
                     del_list.append((key1, key2))
 
@@ -102,11 +102,14 @@ class Bin_energy_data(Dataset):
             idx = idx.tolist()
         key = list(self.en_dep.keys())[idx]
 
-        d_tens = torch.zeros((110, 11, 21))  # Formatted as [x_idx, y_idx, z_idx]
+        # d_tens = torch.zeros((110, 11, 21))  # Formatted as [x_idx, y_idx, z_idx]
+        d_tens = torch.zeros((110, 3, 11))  # Formatted as [x_idx, y_idx, z_idx]
+        
         tmp = self.en_dep[key]
 
         for z, x, y in tmp:
-            d_tens[x, y, z] = tmp[(z, x, y)]
+            d_tens[x, y-4, z] = tmp[(z, x, y)]
+
         d_tens = d_tens.unsqueeze(0)  # Only in conv3d
 
         en_list = torch.Tensor(self.energies[key])
