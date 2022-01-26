@@ -79,13 +79,15 @@ def main(config):
             target = target.float()
             output = model(en_dep)
 
-            my_target = torch.squeeze(target, axis=1)
-            my_output = torch.squeeze(output, axis=1)
+            my_target = target[:, 0]
+            my_output = output[:, 0]
             my_rel_error = abs(my_target - my_output) / my_target
-            d = {'output': my_output, 'target': my_target, 'rel_error': my_rel_error}
+            d = {'output': my_output.cpu(), 'target': my_target.cpu(), 'rel_error': my_rel_error.cpu()}
             df = pd.DataFrame(data=d, index=range(len(my_output)))
             epoch_num = int(str(config.resume)[-6:-4])
-            my_path = os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'csv_files', f'epoch_{epoch_num}')
+            my_path = os.path.join('./', 'csv_files', f'epoch_{epoch_num}')
+            if not os.path.exists(my_path):
+                os.makedirs(my_path)
             df = df.sort_values(by=['target'])
             df.to_csv(os.path.join(my_path, "data_frame.csv"))
             plt.figure(num=0, figsize=(12, 6))

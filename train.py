@@ -57,7 +57,7 @@ def main(config):
 
 if __name__ == '__main__':
 
-    num_classes = 1
+    num_classes = 5
 
     args = argparse.ArgumentParser(description='PyTorch Template')
     args.add_argument('-c', '--config', default=None, type=str,
@@ -75,7 +75,7 @@ if __name__ == '__main__':
     ]
     config = ConfigParser.from_args(args, options)
 
-    hf = h5py.File(os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'num_classes.h5'), 'w')
+    hf = h5py.File(os.path.join('./', 'num_classes.h5'), 'w')
     hf.create_dataset('dataset_1', data=num_classes)
     hf.close()
 

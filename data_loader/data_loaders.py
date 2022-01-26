@@ -37,9 +37,9 @@ class data_loader(BaseDataLoader):
     def __init__(self, data_dir, batch_size, shuffle=True, validation_split=0.0, num_workers=1, training=True):
 
         if training == True:
-            self.dataset = torch.load(os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'data', 'train', 'train.pt'))
+            self.dataset = torch.load(os.path.join('./', 'data', 'train', 'train.pt'))
         else:
-            self.dataset = torch.load(os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'data', 'test', 'test.pt'))
+            self.dataset = torch.load(os.path.join('./', 'data', 'test', 'test.pt'))
 
         print("Dataset len: ", len(self.dataset))
         super().__init__(self.dataset, batch_size, shuffle, validation_split, num_workers)
@@ -66,7 +66,7 @@ class Bin_energy_data(Dataset):
             for cntr2, (key2, value2) in enumerate(value1.items()):
                 if key2[1] < 4 or key2[1] > 6 or key2[2] > 10:
                     pass
-                    # del_list.append((key1, key2))
+                    del_list.append((key1, key2))
 
         
         # self.energies = EcalDataIO.xymatio(en_file)
@@ -113,7 +113,7 @@ class Bin_energy_data(Dataset):
         num_showers = len(en_list)
 
         ######### Energy bins Generation ########
-        hf = h5py.File(os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'num_classes.h5'), 'r')
+        hf = h5py.File(os.path.join('./', 'num_classes.h5'), 'r')
         num_classes = hf.get('dataset_1')
         num_classes = int(np.array(num_classes))
         hf.close()

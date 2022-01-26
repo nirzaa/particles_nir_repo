@@ -14,7 +14,7 @@ def ensure_dir(dirname):
 
 def read_json(fname):
     fname = Path(fname)
-    fname = os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'config.json')
+    fname = os.path.join('./', 'config.json')
     fname = Path(fname)
     with fname.open('rt') as handle:
         return json.load(handle, object_hook=OrderedDict)
