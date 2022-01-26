@@ -10,6 +10,9 @@ import model.model as module_arch
 from parse_config import ConfigParser
 from utils import my_utils
 import os
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 NUM_CLASSES = 1
 RAND_NUM = 0
@@ -75,6 +78,31 @@ def main(config):
             en_dep, target, num, idx = en_dep.to(device), target.to(device), num.to(device), idx.to(device)
             target = target.float()
             output = model(en_dep)
+
+            my_target = torch.squeeze(target, axis=1)
+            my_output = torch.squeeze(output, axis=1)
+            my_rel_error = abs(my_target - my_output) / my_target
+            d = {'output': my_output, 'target': my_target, 'rel_error': my_rel_error}
+            df = pd.DataFrame(data=d, index=range(len(my_output)))
+            epoch_num = int(str(config.resume)[-6:-4])
+            my_path = os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'csv_files', f'epoch_{epoch_num}')
+            df = df.sort_values(by=['target'])
+            df.to_csv(os.path.join(my_path, "data_frame.csv"))
+            plt.figure(num=0, figsize=(12, 6))
+            plt.clf()
+            plt.scatter(range(len(df['output'])), df['output'], label='output')
+            plt.scatter(range(len(df['target'])), df['target'], label='target')
+            plt.legend()
+            plt.plot()
+            plt.savefig(os.path.join(my_path, 'output_target'))
+
+            plt.figure(num=1, figsize=(12, 6))
+            plt.clf()
+            plt.scatter(range(len(df['rel_error'])), df['rel_error'], label='rel_error')
+            plt.legend()
+            plt.plot()
+            plt.savefig(os.path.join(my_path, 'rel_error'))
+            
             loss = loss_fn(output, target)
             bias = output - target
 

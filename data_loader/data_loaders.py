@@ -60,9 +60,22 @@ class Bin_energy_data(Dataset):
     def __init__(self, en_dep_file, en_file, moment=1, min_shower_num=0, max_shower_num=10000, file=0):
 
         self.en_dep = EcalDataIO.ecalmatio(en_dep_file)  # Dict with 100000 samples {(Z,X,Y):energy_stamp}
-        
         self.energies = EcalDataIO.energymatio(en_file)
+        del_list = []
+        for cntr1, (key1, value1) in enumerate(self.en_dep.items()):
+            for cntr2, (key2, value2) in enumerate(value1.items()):
+                if key2[1] < 4 or key2[1] > 6 or key2[2] > 10:
+                    pass
+                    # del_list.append((key1, key2))
+
+        
         # self.energies = EcalDataIO.xymatio(en_file)
+
+        for key1, key2 in del_list:
+            # self.energies[key1] = list(self.energies[key1])
+            del self.en_dep[key1][key2]
+            # del self.energies[key1][cntr2]
+            # self.energies[key1] = tuple(self.energies[key1])
 
         self.moment = moment
         self.file = file
