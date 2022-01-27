@@ -6,6 +6,7 @@ import torch
 import plotly.express as px
 from tqdm import tqdm
 import numpy as np
+from torchsummary import summary
 
 def means_plotter():
     means = []
@@ -44,7 +45,13 @@ def weights_plotter():
                     state_dict = checkpoint['state_dict']
                     layers = list(state_dict.keys())
                     weights = list(state_dict.values())
-            for cntr1, layer in enumerate(tqdm(layers)):
+            # line 47 in trainer
+            # print('Model output')
+            # print('='*50)
+            # summary(vgg, (3, 224, 224)) 
+            print('Model architecture')
+            print('='*50)
+            for cntr1, layer in enumerate(layers):
                 print(cntr1, layer, weights[cntr1].shape)
             for cntr1, layer in enumerate(tqdm(layers)):
                 if cntr1 == 78:

@@ -3,6 +3,7 @@ import torch
 from torchvision.utils import make_grid
 from base import BaseTrainer
 from utils import inf_loop, MetricTracker
+from torchsummary import summary
 
 
 class Trainer(BaseTrainer):
@@ -38,6 +39,12 @@ class Trainer(BaseTrainer):
         :return: A log that contains average loss and metric in this epoch.
         """
         self.model.train()
+
+        # print('Model output')
+        # print('='*50)
+        # # the shape is from data_loaders.py line 109
+        # summary(self.model, (1, 110, 11, 21)) 
+        
         self.train_metrics.reset()
         # for batch_idWx, (data, target) in enumerate(self.data_loader):
         for batch_idx, data in enumerate(self.data_loader):
