@@ -8,3 +8,4 @@ log/
 # models/
 data/
 parenv/
+*.pt
