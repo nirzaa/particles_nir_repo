@@ -5,6 +5,6 @@ __pycache__/
 # Distribution / packaging
 
 log/
-models/
+# models/
 data/
 parenv/
