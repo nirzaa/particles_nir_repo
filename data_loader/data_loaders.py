@@ -125,7 +125,8 @@ class Bin_energy_data(Dataset):
         en_list = np.array(en_list.sort().values)[::-1]
 
         if len(en_list) >= num_classes:
-            final_list[:num_classes] = en_list[:num_classes]
+            # final_list[:num_classes] = en_list[:num_classes]
+            final_list[:num_classes] = [len(en_list)]
         elif len(en_list) < num_classes:
             final_list[:len(en_list)] = en_list
         final_list = torch.Tensor(final_list)  # Wrap it in a tensor - important for training and testing.
