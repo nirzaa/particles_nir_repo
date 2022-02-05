@@ -134,7 +134,7 @@ def svd_tensors():
     return None
 
 def eigens_scattering():
-    print('here')
+
     epoch_list = np.linspace(10, 100, 10, dtype='int')
 
     matrices_math = './saved/models/matrices'
@@ -143,6 +143,8 @@ def eigens_scattering():
 
     total_points = []
     for i, num in enumerate(epoch_list):
+        df = pd.read_csv(f'./csv_files/project_2.1/epoch_{num}/data_frame.csv')
+        targets = np.floor(df.target.to_numpy()).astype(int)
         matrix = torch.load(os.path.join(matrices_math, f'weights_tensor_{num}epoch.pt'), map_location=torch.device('cpu'))
         x = matrix.cpu().numpy()
         data = x
@@ -161,19 +163,25 @@ def eigens_scattering():
 
         plt.clf()
         ax = fig.add_subplot(projection='3d')
-        ax.scatter(total_points[i,:,0], total_points[i,:,1], total_points[i,:,2], marker='o')
+        ax.scatter(total_points[i,:,0], total_points[i,:,1], total_points[i,:,2])
         plt.savefig(os.path.join(my_path, f'{num}_epoch_3d'))
 
         plt.clf()
         plt.scatter(total_points[i,:,0], total_points[i,:,1])
+        for j, txt in enumerate(targets):
+            plt.annotate(txt, (total_points[i,j,0], total_points[i,j,1]))
         plt.savefig(os.path.join(my_path, f'{num}_epoch_2d_xy'))
 
         plt.clf()
         plt.scatter(total_points[i,:,0], total_points[i,:,2])
+        for j, txt in enumerate(targets):
+            plt.annotate(txt, (total_points[i,j,0], total_points[i,j,2]))
         plt.savefig(os.path.join(my_path, f'{num}_epoch_2d_xz'))
 
         plt.clf()
         plt.scatter(total_points[i,:,1], total_points[i,:,2])
+        for j, txt in enumerate(targets):
+            plt.annotate(txt, (total_points[i,j,1], total_points[i,j,2]))
         plt.savefig(os.path.join(my_path, f'{num}_epoch_2d_yz'))
 
 if __name__ == '__main__':
