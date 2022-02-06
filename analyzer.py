@@ -134,8 +134,8 @@ def svd_tensors():
     return None
 
 def eigens_scattering():
-
-    epoch_list = np.linspace(10, 100, 10, dtype='int')
+    # epoch_list = np.linspace(10, 100, 10, dtype='int')
+    epoch_list = np.arange(10, 250, 20, dtype='int')
 
     matrices_math = './saved/models/matrices'
 
@@ -143,7 +143,7 @@ def eigens_scattering():
 
     total_points = []
     for i, num in enumerate(epoch_list):
-        df = pd.read_csv(f'./csv_files/project_2.1/epoch_{num}/data_frame.csv')
+        df = pd.read_csv(f'./csv_files/epoch_{num}/data_frame.csv')
         targets = np.floor(df.target.to_numpy()).astype(int)
         matrix = torch.load(os.path.join(matrices_math, f'weights_tensor_{num}epoch.pt'), map_location=torch.device('cpu'))
         x = matrix.cpu().numpy()
