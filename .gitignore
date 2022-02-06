@@ -9,3 +9,8 @@ log/
 data/
 parenv/
 *.pt
+saved/models/Cont/model_best.pth
+saved/models/my_model/0120_070205/checkpoint-epoch1.pth
+saved/models/Cont/config.json
+saved/models/Mnist_LeNet/1229_073133/config.json
+saved/models/my_model/0120_065933/config.json
