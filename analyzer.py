@@ -178,6 +178,9 @@ def eigens_scattering():
         plt.clf()
         ax = fig.add_subplot(projection='3d')
         ax.scatter(total_points[i,:,0], total_points[i,:,1], total_points[i,:,2])
+        for j, txt in enumerate(targets):
+            # plt.annotate(txt, (total_points[i,j,0], total_points[i,j,1], total_points[i,j,2]))
+            ax.text(total_points[i,j,0], total_points[i,j,1], total_points[i,j,2],  '%s' % (txt), size=10, zorder=1, color='k')
         plt.savefig(os.path.join(my_path, f'{num}_epoch_3d'))
 
         plt.clf()
