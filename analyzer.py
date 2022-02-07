@@ -201,9 +201,34 @@ def eigens_scattering():
             plt.annotate(txt, (total_points[i,j,1], total_points[i,j,2]))
         plt.savefig(os.path.join(my_path, f'{num}_epoch_2d_yz'))
 
+def rel_error_mean_variance():
+    epoch_list = np.arange(10, 60, 10, dtype='int')
+    
+    my_path = os.path.join('./', 'csv_files')
+    dirlist = [item for item in os.listdir(my_path) if os.path.isdir(os.path.join(my_path, item)) ]
+    with open(os.path.join(my_path, 'stats.txt'), 'w') as f:
+        f.write('Stats for our data\n')
+        f.write('='*30)
+        f.write('\n\n')
+    for dir in dirlist:
+        with open(os.path.join(my_path, 'stats.txt'), 'a+') as f:
+            f.write(f'\n{dir} directory\n')
+            f.write('='*20)
+        for epoch in epoch_list:
+            df = pd.read_csv(os.path.join(my_path, dir, f'epoch_{epoch}', 'data_frame.csv'))
+            rel_error = df.rel_error
+            mean = rel_error.mean()
+            std = rel_error.std()
+            with open(os.path.join(my_path, 'stats.txt'), 'a+') as f:
+                f.write(f'\n{epoch} epoch - mean: {mean}, std: {std}\n')
+
+
 if __name__ == '__main__':
     # means_plotter()
     # weights_anal()
     # load_matrix()
-    svd_tensors()
-    eigens_scattering()
+
+    # svd_tensors()
+    # eigens_scattering()
+
+    rel_error_mean_variance()
