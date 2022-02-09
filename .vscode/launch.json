@@ -13,6 +13,7 @@
             // "console": "integratedTerminal",
             "console": "internalConsole",
             "redirectOutput": true,
+<<<<<<< Updated upstream
             // "args": ["--config","/home/nirz/par_project/particles_nir_repo/config.json"]
             // "args": ["--resume","/home/nirz/par_project/particles_nir_repo/saved/models/Cont/model_best.pth", "--c", "/home/nirz/par_project/particles_nir_repo/saved/models/Cont/config.json"]
             "args": ["--resume","/home/nirz/par_project/particles_nir_repo/saved/models/my_model/0126_110510/checkpoint-epoch10.pth", "--c", "/saved/models/Cont/config.json"]
@@ -23,3 +24,16 @@
         }
     ]
 }
+=======
+            // "args": ["--config","./config.json"]
+            // "args": ["--resume","./saved/models/Cont/model_best.pth", "--c", "./saved/models/Cont/config.json"]
+            "args": ["--resume","./saved/models/my_model/0209_130030/checkpoint-epoch100.pth", "--c", "./saved/models/Cont/config.json"]
+            
+            // "args": ["--config","D:\\local_github\\particles_nir_repo\\config.json"]
+            // "args": ["--resume","D:\\local_github\\particles_nir_repo\\saved\\models\\Cont\\model_best.pth", "--c", "D:\\local_github\\particles_nir_repo\\saved\\models\\Cont\\config.json"]
+            // "args": ["--resume","D:\\local_github\\particles_nir_repo\\saved\\models\\my_model\\0206_143536\\checkpoint-epoch10.pth", "--c", "D:\\local_github\\particles_nir_repo\\saved\\models\\Cont\\config.json"]
+        }
+    ]
+}
+
+>>>>>>> Stashed changes

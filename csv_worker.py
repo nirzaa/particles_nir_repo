@@ -2,16 +2,21 @@ from numpy import dtype
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
+<<<<<<< Updated upstream
 import torch
 import plotly.express as px
 from tqdm import tqdm
 import numpy as np
 from torchsummary import summary
+=======
+import numpy as np
+>>>>>>> Stashed changes
 
 def means_plotter():
     means = []
     stds = []
     epoch_list = np.linspace(10, 100, 10, dtype='int')
+<<<<<<< Updated upstream
     my_path_fig = os.path.join('./', 'csv_files', 'rel_error_means')
 
     for epoch in epoch_list:
@@ -21,15 +26,31 @@ def means_plotter():
         my_std = df.rel_error.std()
         means.append(my_mean)
         stds.append(my_std)
+=======
+    my_path_fig = os.path.join('./', 'my_data_done', 'rel_error_means')
+
+    for epoch in epoch_list:
+        my_path = os.path.join('./', 'my_data_done', f'epoch_{epoch}', 'data_frame.csv')
+        df = pd.read_csv(my_path)
+        my_mean = df.rel_error.mean()
+        std = df.rel_error.std()
+        means.append(my_mean)
+        stds.append(std)
+>>>>>>> Stashed changes
 
     plt.figure(num=2, figsize=(12, 6))
     plt.clf()
     plt.scatter(epoch_list, means, label='means')
+<<<<<<< Updated upstream
     plt.errorbar(epoch_list, means, xerr=0, yerr=stds)
+=======
+    plt.errorbar(epoch_list, means, xerr = 0, yerr = stds)
+>>>>>>> Stashed changes
     plt.legend()
     plt.plot()
     plt.savefig(os.path.join(my_path_fig))
 
+<<<<<<< Updated upstream
 def weights_plotter():
     my_folder = os.path.join('./', 'saved', 'models', 'my_model', '0126_093256')
     for idx, file in enumerate(os.listdir(my_folder)):
@@ -93,3 +114,7 @@ def weights_plotter():
 if __name__ == '__main__':
     means_plotter()
     weights_plotter()
+=======
+if __name__ == '__main__':
+    means_plotter()
+>>>>>>> Stashed changes

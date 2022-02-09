@@ -84,7 +84,24 @@ def main(config):
             my_rel_error = abs(my_target - my_output) / my_target
             d = {'output': my_output.cpu(), 'target': my_target.cpu(), 'rel_error': my_rel_error.cpu()}
             df = pd.DataFrame(data=d, index=range(len(my_output)))
+<<<<<<< Updated upstream
             epoch_num = int(str(config.resume)[-6:-4])
+=======
+            flag = -1
+            try:
+                epoch_num = int(str(config.resume)[-7:-4])
+                flag = 0
+            except:
+                pass
+            if flag == -1:
+                try:
+                    epoch_num = int(str(config.resume)[-6:-4])
+                    flag = 0
+                except:
+                    pass
+            if flag == -1:
+                epoch_num = 0
+>>>>>>> Stashed changes
             my_path = os.path.join('./', 'csv_files', f'epoch_{epoch_num}')
             if not os.path.exists(my_path):
                 os.makedirs(my_path)

@@ -380,6 +380,11 @@ This project is inspired by the project [Tensorflow-Project-Template](https://gi
 ## training:
 `python D:\\local_github\\particles_nir_repo\\train.py --config D:\\local_github\\particles_nir_repo\\config.json`
 
+<<<<<<< Updated upstream
+=======
+`python ./train.py --config ./config.json`
+
+>>>>>>> Stashed changes
 ## validating:
 `python D:\\local_github\\particles_nir_repo\\test.py --resume D:\\local_github\\particles_nir_repo\\saved\\models\\Cont\\model_best.pth --c D:\\local_github\\particles_nir_repo\\saved\\models\\Cont\\config.json`
 

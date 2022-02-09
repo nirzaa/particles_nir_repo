@@ -4,6 +4,7 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 import math
 from functools import partial
+import os
 
 __all__ = ['ResNet', 'resnet10', 'resnet18', 'resnet34', 'resnet50', 'resnet101', 'resnet152', 'resnet200']
 
@@ -177,6 +178,13 @@ class ResNet(nn.Module):
         x = self.layer4(x)
 
         x = x.view(x.size(0), -1)
+
+        my_path = './saved/models/matrices'
+        isExist = os.path.exists(my_path)
+        if not isExist:
+            os.makedirs(my_path)
+        torch.save(x, os.path.join(my_path, 'weights_tensor.pt'))
+
         if self.last_fc:
             x = self.fc_1(x)
 
