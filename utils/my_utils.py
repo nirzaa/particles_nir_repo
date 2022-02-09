@@ -10,14 +10,14 @@ from scipy.io import loadmat
 import h5py
 # from scipy.optimize import curve_fit
 
-my_path = os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo')
+my_path = os.path.join('./')
 sys.path.append(my_path)
 from data_loader.data_loaders import Bin_energy_data
 
 
 project_path = Path(__file__).parent.parent
-fig_path = os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'saved', 'figs')
-res_path = os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'saved', 'diff_run_res')
+fig_path = os.path.join('./', 'saved', 'figs')
+res_path = os.path.join('./', 'saved', 'diff_run_res')
 
 def merge_and_split_data(path, relation, moment, min_shower_num, max_shower_num, file):
     """
@@ -30,8 +30,8 @@ def merge_and_split_data(path, relation, moment, min_shower_num, max_shower_num,
         # edep_file = path / "raw" / f"signal.al.elaser.IP0{i}.edeplist.mat"
         # en_file = path / "raw" / f"signal.al.elaser.IP0{i}.energy.mat"
 
-        edep_file = os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'data', 'raw', f'signal.al.elaser.IP0{i}.edeplist.mat')
-        en_file = os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'data', 'raw', f'signal.al.elaser.IP0{i}.energy.mat')
+        edep_file = os.path.join('./', 'data', 'raw', f'signal.al.elaser.IP0{i}.edeplist.mat')
+        en_file = os.path.join('./', 'data', 'raw', f'signal.al.elaser.IP0{i}.energy.mat')
 
         dataset = Bin_energy_data(edep_file, en_file, moment=moment,
                                   min_shower_num=min_shower_num, max_shower_num=max_shower_num, file=i)
@@ -48,8 +48,8 @@ def merge_and_split_data(path, relation, moment, min_shower_num, max_shower_num,
     # torch.save(train_d, path / "train//train.pt")
     # torch.save(test_d, path / "test//test.pt")
 
-    torch.save(train_d, os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'data', 'train', 'train.pt'))
-    torch.save(test_d, os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'data', 'test', 'test.pt'))
+    torch.save(train_d, os.path.join('./', 'data', 'train', 'train.pt'))
+    torch.save(test_d, os.path.join('./', 'data', 'test', 'test.pt'))
 
 
 def test_bins(output, target, nums, bin_num=10, name=None, run_num='0'):
@@ -57,7 +57,7 @@ def test_bins(output, target, nums, bin_num=10, name=None, run_num='0'):
 
     # Generate the bins
 
-    hf = h5py.File(os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'num_classes.h5'), 'r')
+    hf = h5py.File(os.path.join('./', 'num_classes.h5'), 'r')
     num_classes = hf.get('dataset_1')
     num_classes = int(np.array(num_classes))
     hf.close()
@@ -171,6 +171,6 @@ if __name__ == '__main__':
     # EDA("C:\\Users\\elihu\\PycharmProjects\\LUXE\\nongitdata\\Multiple Energies\\")
     # data_path = Path("C:\\Users\\elihu\\PycharmProjects\\LUXE\\LUXE-project-master\\data\\")
 
-    data_path = Path(my_path = os.path.join('D:', os.sep, 'local_github', 'particles_nir_repo', 'data'))
+    data_path = Path(my_path = os.path.join('./', 'data'))
     merge_and_split_data(data_path, 0.8, moment=3, min_shower_num=1, max_shower_num=50000, file=[5])
     exit()
